@@ -72,7 +72,7 @@ export class HomeComponent extends HomeService implements OnDestroy {
     if (id) {
       this.data = this.data.map(el => (el.id === row.id ? row : el));
     } else {
-      this.data.push({ ...row, id: getMaxIdByKey(this.data) });
+      this.data = [...this.data, { ...row, id: getMaxIdByKey(this.data) }];
     }
   }
 

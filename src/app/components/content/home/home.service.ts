@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ITableColumn } from '@app/components/commons/table/table.models';
 import { HttpService } from '@app/core';
@@ -9,10 +8,6 @@ import { Observable } from 'rxjs';
 })
 export abstract class HomeService extends HttpService {
   API_URL = 'assets/mockData.json';
-
-  // constructor(public httpClient: HttpClient) {
-  //   super(httpClient);
-  // }
 
   getData(): Observable<any> {
     return this.http.get(this.API_URL, {});
