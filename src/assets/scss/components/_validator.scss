@@ -1,0 +1,46 @@
+%error-message {
+  font-weight: 600;
+  color: $color-red;
+  font-size: 13px;
+  width: 100%;
+  line-height: 13px;
+  white-space: normal;
+  padding-left: 1rem;
+}
+
+.validator {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  & app-validator {
+    line-height: 13px;
+  }
+
+  & .error-message {
+    @extend %error-message;
+  }
+
+  &-input-number {
+    position: relative;
+    width: 100%;
+
+    & .error-message {
+      @extend %error-message;
+
+      top: calc(25px + 1px) !important;
+      bottom: 1.5px;
+      white-space: nowrap;
+    }
+  }
+
+  &-msg {
+    font-weight: bold;
+    color: $color-red;
+    font-size: 13px;
+    line-height: 1.15;
+    width: 100%;
+    white-space: normal;
+  }
+}

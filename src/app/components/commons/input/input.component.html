@@ -1,0 +1,23 @@
+<mat-form-field class="input-component" [ngClass]="[config.type, config.customClass ?? '']">
+  <mat-label class="form-label">
+    <span [innerHTML]="config.header | translate"></span>
+  </mat-label>
+  <input
+    *ngIf="formControl"
+    ngDefaultControl
+    matInput
+    [formControl]="formControl"
+    (ngModelChange)="modelChange($event)"
+    [type]="config.type ?? 'text'"
+    [class]="config.customClass"
+    [attr.placeholder]="config.placeholder | translate"
+    [readonly]="config.readonly"
+    autocomplete="off"
+    [attr.maxLength]="config.maxLength"
+    (blur)="onBlur()"
+    [attr.step]="config.step ?? 1"
+    [attr.min]="config.min"
+    [attr.max]="config.max"
+    (valueChange)="onValueChange($event)"
+  />
+</mat-form-field>

@@ -1,0 +1,33 @@
+<div *ngIf="(buttonConfig$ | async)?.length; else singleButton" [class]="customClass">
+  @for (button of buttonConfig$ | async; track i; let i = $index) {
+    <ng-container *ngTemplateOutlet="buttonTemplate; context: { button: button }"></ng-container>
+  }
+</div>
+
+<ng-template #singleButton>
+  <ng-container *ngIf="config">
+    <ng-container *ngTemplateOutlet="buttonTemplate; context: { button: config }"></ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-template #buttonTemplate let-button="button">
+  <button
+    [disabled]="button?.disabled"
+    [class.disabled]="button?.disabled"
+    (click)="onClickButton($event, button.id)"
+    [class]="button?.className"
+    [class.round]="button?.isRound"
+    class="button-component"
+    [ngClass]="button?.customClass || ''"
+    [matTooltip]="button?.tooltipTitle | translate"
+    [attr.aria-label]="button?.tooltipTitle | translate"
+  >
+    <ng-container *ngIf="button?.name">
+      {{ button?.name | translate }}
+    </ng-container>
+    <ng-container *ngIf="button?.icon">
+      <mat-icon [fontIcon]="button.icon"></mat-icon>
+    </ng-container>
+    <ng-content></ng-content>
+  </button>
+</ng-template>

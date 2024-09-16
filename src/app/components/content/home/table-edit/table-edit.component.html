@@ -1,0 +1,10 @@
+<form *ngIf="form" [formGroup]="form">
+  @for (item of formGroupConfig | async; track i; let i = $index) {
+    <app-form-elements ngDefaultControl [formControl]="form.get(item.formControlName) | formControlPipe" [config]="item?.config" />
+  }
+
+  <div *ngIf="!isModalTypeShow" class="flex-center my-3">
+    <app-button [config]="{ name: 'common.buttons.save', disabled: form.invalid }" (btnClick)="onClickOk()" />
+    <app-button class="ms-3" [config]="{ name: 'common.buttons.cancel' }" (btnClick)="onClickClose()" />
+  </div>
+</form>

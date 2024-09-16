@@ -1,0 +1,24 @@
+{
+  "common": {
+    "buttons": {
+      "add": "Add",
+      "cancel": "Cancel",
+      "save": "Save"
+    },
+    "table": {
+      "operations": "Operations",
+      "tooltip": {
+        "show": "Browse",
+        "edit": "Edit",
+        "delete": "Delete"
+      }
+    }
+  },
+  "validation": {
+    "error": {
+      "required": "Required",
+      "minlength": "Too few characters entered, min: {{value}}",
+      "maxlength": "Too few characters entered, max: {{value}}"
+    }
+  }
+}

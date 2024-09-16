@@ -1,0 +1,11 @@
+<mat-dialog-content class="universal-dialog-component">
+  <div class="dialog-header">
+    <div class="header">{{ data.title | translate }}</div>
+
+    <app-button [config]="{ icon: 'close', isRound: true }" (btnClick)="closeDialog()" />
+  </div>
+
+  <div class="dialog-body">
+    <ng-template #dynamicContent></ng-template>
+  </div>
+</mat-dialog-content>

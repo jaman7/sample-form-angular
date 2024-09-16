@@ -1,0 +1,31 @@
+.input-component {
+  background-color: transparent;
+  width: 100% !important;
+  flex: 1 1 auto;
+  line-height: initial !important;
+
+  & .mat-mdc-form-field-infix {
+    width: 100% !important;
+    flex: 1 1 auto;
+  }
+
+  & .mat-mdc-form-field {
+    width: 100%;
+  }
+
+  & .mat-mdc-text-field-wrapper {
+    background-color: transparent !important;
+
+    &:hover {
+      background-color: transparent !important;
+    }
+  }
+
+  & .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+
+  & .mdc-text-field {
+    padding: 0 0.5rem;
+  }
+}

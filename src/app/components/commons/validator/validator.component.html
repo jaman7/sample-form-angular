@@ -1,0 +1,5 @@
+<ng-container *ngIf="control?.touched || control.errors || (control?.dirty && control.invalid)">
+  <ng-container *ngIf="control?.errors as errors">
+    <span class="error-message" [innerText]="message(errors) | translate: { value: value }"></span>
+  </ng-container>
+</ng-container>

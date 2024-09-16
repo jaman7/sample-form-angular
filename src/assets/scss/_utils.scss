@@ -1,0 +1,31 @@
+.col-auto {
+  flex: 0 0 auto;
+  width: 100%;
+}
+
+.flex1 {
+  flex: 1;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+.mx-3 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.my-3 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.ms-3 {
+  margin-left: 0.5rem;
+}
+
+.mb-2px {
+  margin-bottom: 2px;
+}

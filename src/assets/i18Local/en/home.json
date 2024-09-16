@@ -1,0 +1,19 @@
+{
+  "table": {
+    "position": "Number",
+    "name": "Name",
+    "weight": "Weight",
+    "symbol": "Symbol"
+  },
+  "modal": {
+    "add": "Add Table",
+    "edit": "Edit Table",
+    "show": "View Table",
+    "form": {
+      "position": "Number",
+      "name": "Name",
+      "weight": "Weight",
+      "symbol": "Symbol"
+    }
+  }
+}

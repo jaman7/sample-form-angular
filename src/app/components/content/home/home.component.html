@@ -1,0 +1,8 @@
+<app-table
+  [showGlobalFilter]="true"
+  [showAddButton]="true"
+  [rows]="data"
+  [columns]="(columns$ | async) ?? []"
+  [showControls]="true"
+  (buttonEvent)="onDocAction($event)"
+/>

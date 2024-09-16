@@ -1,0 +1,37 @@
+<div class="form-elements-component">
+  <ng-template [ngTemplateOutlet]="formTypes"></ng-template>
+</div>
+
+<ng-template #formTypes>
+  <ng-container [ngSwitch]="config.formCellType">
+    <ng-container *ngSwitchDefault>
+      <p>{{ getValue(config) }}</p>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'input'"
+      ><div class="validator">
+        <app-input
+          [ngClass]="'col-auto mb-2px'"
+          ngDefaultControl
+          [formControl]="formControl"
+          [value]="formControl?.value"
+          [config]="itemsConfig(config)"
+        />
+        <app-validator [control]="formControl" />
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'input-number'">
+      <div class="validator">
+        <app-input
+          [ngClass]="'col-auto mb-2px'"
+          ngDefaultControl
+          [formControl]="formControl"
+          [value]="formControl?.value"
+          [config]="itemsConfig(config)"
+        />
+        <app-validator [control]="formControl" />
+      </div>
+    </ng-container>
+  </ng-container>
+</ng-template>

@@ -1,0 +1,92 @@
+$border-size: 1px;
+$font-size: 14px;
+$font-body-color: #141313;
+$border-radius: 6px;
+
+.table-component {
+  font-family: $fontRoboto;
+  font-size: $font-size;
+  border: 1px solid $color-gray !important;
+  border-radius: $border-radius;
+  background-color: transparent !important;
+
+  & thead,
+  & tbody {
+    tr {
+      height: auto;
+
+      th,
+      td {
+        padding: 0.5rem;
+        font-size: $font-size;
+        line-height: initial;
+        border-color: $color-gray;
+      }
+    }
+  }
+
+  & thead {
+    tr {
+      th {
+        text-align: center;
+        font-weight: 500;
+        font-size: $font-size + 2;
+
+        &:first-child {
+          border-top-left-radius: $border-radius;
+        }
+
+        &:last-child {
+          border-top-right-radius: $border-radius;
+        }
+      }
+    }
+  }
+
+  & tbody {
+    tr {
+      td {
+        color: $font-body-color;
+
+        &.mat-column-operations {
+          padding: 0 0.5rem;
+        }
+      }
+
+      &:last-child {
+        td {
+          &:first-child {
+            border-bottom-left-radius: $border-radius;
+          }
+
+          &:last-child {
+            border-bottom-right-radius: $border-radius;
+          }
+        }
+      }
+    }
+  }
+
+  & .buttons-container {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.table-filters {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+
+  & .mat-mdc-form-field {
+    width: 100%;
+  }
+
+  & .mdc-text-field {
+    background-color: transparent !important;
+  }
+
+  & .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+}
