@@ -2,7 +2,7 @@ import { Language } from '@app/shared/enums/language';
 import { Action } from '@ngrx/store';
 
 export enum LanguageActionTypes {
-  CHANGE_LANGUAGE = '[Language] Change language',
+  CHANGE_LANGUAGE = '[Language] Change Language',
 }
 
 export class ActionLanguageChange implements Action {

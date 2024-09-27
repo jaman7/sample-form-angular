@@ -2,7 +2,6 @@ import { Language } from '@app/shared/enums/language';
 import { LanguageActions, LanguageActionTypes } from './language.actions';
 
 export const languageFeatureKey = 'language';
-
 export const initialState: Language = 'en';
 
 // eslint-disable-next-line @typescript-eslint/default-param-last

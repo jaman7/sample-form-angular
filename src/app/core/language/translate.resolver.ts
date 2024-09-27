@@ -9,13 +9,13 @@ import { CoreModule } from '../core.module';
 export class TranslateResolver {
   constructor(private languageService: LanguageService) {}
 
-  resolve(route: ActivatedRouteSnapshot): Promise<boolean> {
-    const i18nPartials = this.getRouteTranslatePartials(route);
-    return this.languageService.getPartialsTranslation(i18nPartials);
+  private extractTranslatePartials(route: ActivatedRouteSnapshot): string[] {
+    const i18n = route.data.i18Local || [];
+    return Array.isArray(i18n) ? i18n : [i18n];
   }
 
-  private getRouteTranslatePartials(route: ActivatedRouteSnapshot): string[] {
-    const i18n = route.data['i18Local'] || [];
-    return Array.isArray(i18n) ? i18n : [i18n];
+  resolve(route: ActivatedRouteSnapshot): Promise<boolean> {
+    const i18nPartials = this.extractTranslatePartials(route);
+    return this.languageService.loadPartials(i18nPartials);
   }
 }

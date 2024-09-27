@@ -10,7 +10,7 @@ export class RouterSerializer implements RouterStateSerializer<RouterStateUrl> {
     while (route.firstChild) {
       route = route.firstChild;
     }
-    const { url } = routerState;
+    const { url } = routerState || {};
     const { queryParams } = routerState.root;
     const { params } = route;
     return { url, params, queryParams };

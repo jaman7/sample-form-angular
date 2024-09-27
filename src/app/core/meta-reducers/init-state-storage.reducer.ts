@@ -5,45 +5,56 @@ import { AppState } from '../core.state';
 import { APP_PREFIX } from '../local-storage/local-storage.service';
 
 export function getStateKeys(storageKey: string): string[] {
-  return storageKey
-    .replace(APP_PREFIX, '')
-    .toLowerCase()
-    .split('.')
-    .map(key => toCamelCase(key));
+  return storageKey.replace(APP_PREFIX, '').toLowerCase().split('.').map(toCamelCase);
 }
 
-export function loadInitialState(): any {
-  return Object.keys(sessionStorage).reduce((state: any, storageKey: string) => {
-    let stateTmp = state;
+function safelyParseJSON(jsonString: string): any {
+  try {
+    return JSON.parse(jsonString);
+  } catch (error) {
+    return null;
+  }
+}
 
-    if (!storageKey.includes(APP_PREFIX)) {
-      return stateTmp;
+function updateNestedState(state: any, keys: string[], value: any): any {
+  return keys.reduceRight((acc, key, index) => {
+    if (index === keys.length - 1) {
+      return { ...state, [key]: value };
     }
-
-    const stateKeys = getStateKeys(storageKey);
-    stateKeys.forEach((key, index) => {
-      if (index === stateKeys.length - 1) {
-        const storedItem = sessionStorage.getItem(storageKey);
-        // Only parse if the storedItem is not null
-        stateTmp[key] = storedItem ? JSON.parse(storedItem) : null;
-        return stateTmp;
-      }
-      stateTmp[key] = stateTmp[key] || {};
-      stateTmp = stateTmp[key];
-      return false;
-    });
-
-    return state;
+    return { ...state, [key]: { ...state[key], ...acc } };
   }, {});
 }
 
-export function initStateFromSessionStorage(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
+export function loadInitialState(): Record<string, any> {
+  return Object.keys(sessionStorage).reduce((state: any, storageKey: string) => {
+    if (!storageKey.startsWith(APP_PREFIX)) {
+      return state;
+    }
+
+    const storedItem = sessionStorage.getItem(storageKey);
+    if (!storedItem) return state;
+
+    const parsedItem = safelyParseJSON(storedItem);
+    if (parsedItem === null) return state;
+
+    const stateKeys = getStateKeys(storageKey);
+    return updateNestedState(state, stateKeys, parsedItem);
+  }, {});
+}
+
+export function initStateFromLocalStorage(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
   return (state, action) => {
     const newState = reducer(state, action);
+
     if ([INIT.toString(), UPDATE.toString()].includes(action.type)) {
       const loadedState = loadInitialState();
       return { ...newState, ...loadedState };
     }
+
     return newState;
   };
+}
+
+export function debugReducer(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
+  return (state, action) => reducer(state, action);
 }

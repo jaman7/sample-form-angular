@@ -2,11 +2,7 @@ import { MissingTranslationHandler, MissingTranslationHandlerParams } from '@ngx
 
 export class MissingTranslation implements MissingTranslationHandler {
   handle(params: MissingTranslationHandlerParams): string {
-    // eslint-disable-next-line prefer-destructuring
-    const key = params.key.split('.')[0];
-    if (['menu', 'shared'].includes(key)) {
-      return '';
-    }
-    return params.key;
+    const [key] = params.key.split('.');
+    return key === 'default' ? '' : params.key;
   }
 }

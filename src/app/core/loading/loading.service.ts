@@ -8,46 +8,46 @@ export class LoadingService {
   private timeoutCancel: any;
 
   changeRouter(): void {
-    this.clearTimeout();
-    this.loading.next(true);
-    this.timeoutCancel = setTimeout(() => this.checkComplete(), 200);
+    this.startLoading();
+    this.resetTimeout();
   }
 
   addRequest(): void {
-    this.clearTimeout();
     if (this.requestInProgress === 0) {
       this.startLoading();
     }
     this.requestInProgress += 1;
+    this.clearTimeout();
   }
 
   removeRequest(): void {
+    if (this.requestInProgress > 0) {
+      this.requestInProgress -= 1;
+    }
+    this.resetTimeout();
+  }
+
+  private startLoading(): void {
+    if (!this.loading.getValue()) {
+      this.loading.next(true);
+    }
+  }
+
+  private stopLoading(): void {
+    if (this.requestInProgress === 0 && this.loading.getValue()) {
+      this.loading.next(false);
+    }
+  }
+
+  private resetTimeout(): void {
     this.clearTimeout();
-    this.requestInProgress = Math.max(0, this.requestInProgress - 1);
-    this.timeoutCancel = setTimeout(() => this.checkComplete(), 200);
-  }
-
-  startLoading(): void {
-    this.loading.next(true);
-  }
-
-  stopLoading(): void {
-    if (this.requestInProgress === 0) {
-      this.loading.next(false);
-    }
-  }
-
-  private checkComplete(): void {
-    if (this.requestInProgress === 0) {
-      this.loading.next(false);
-    } else {
-      this.removeRequest();
-    }
+    this.timeoutCancel = setTimeout(() => this.stopLoading(), 200);
   }
 
   private clearTimeout(): void {
     if (this.timeoutCancel) {
       clearTimeout(this.timeoutCancel);
+      this.timeoutCancel = null;
     }
   }
 }
